@@ -1,0 +1,21 @@
+.active {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    justify-content: center;
+    border-radius: 3px;
+    transition: all 350ms;
+    margin: 0 10px;
+    display: none;
+    background-color: white;
+}
+
+.App {
+    display: flex;
+}
+
+.App .container {
+    flex-grow: 1;
+}

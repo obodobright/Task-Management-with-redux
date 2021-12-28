@@ -1,15 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import Navbar from "../Layout/Navbar";
-import Sidebar from "../Layout/Sidebar";
+
+import Todo from "./Todo";
 
 export const TodoContainer = () => {
   return (
     <div>
-      <div style={{ display: "flex" }}>
-        <Sidebar />
-        <Navbar />
-      </div>
+      <Todo />
     </div>
   );
 };
