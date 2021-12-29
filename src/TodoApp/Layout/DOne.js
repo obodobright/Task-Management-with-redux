@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Done = ({ done }) => {
   const [complete, setComplete] = useState(done);
 
-  //   console.log(" complete :", complete);
+  //   console.log(done, complete);
   const handleComplete = () => {
     setComplete(!complete);
     // console.log(id);

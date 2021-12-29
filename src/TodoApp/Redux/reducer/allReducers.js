@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import { LoginReducer, signUpReducer } from "./Reducers";
+import { fetchTodo, LoginReducer } from "./Reducers";
 
 export const allReducers = combineReducers({
     login: LoginReducer,
-    // signup: signUpReducer,
+    allTodos: fetchTodo,
 });

@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import { FaTimes } from "react-icons/fa";
 import { BsPlusLg } from "react-icons/bs";
-export const AddNew = ({ handleClose }) => {
+import { useState } from "react";
+export const AddNew = ({ close }) => {
   return (
     <Card>
       <InputHolder>
         <Input placeholder="Task name" />
         <Button>Add Task</Button>
 
-        <CancelBtn onClick={handleClose}>
+        <CancelBtn onClick={close}>
           <FaTimes />
         </CancelBtn>
       </InputHolder>
@@ -16,12 +17,22 @@ export const AddNew = ({ handleClose }) => {
   );
 };
 
-export const AddBtn = ({ newTask, id }) => {
-  // onClick={() => setNewTask(true)}
+export const AddBtn = ({ newtask }) => {
+  const [openAdd, setOpenAdd] = useState(newtask);
+  const handleOpen = () => {
+    setOpenAdd(true);
+  };
+
+  const handleClose = () => {
+    setOpenAdd(false);
+  };
   return (
-    <AddButton onClick={() => newTask(id)}>
-      <BsPlusLg />
-    </AddButton>
+    <>
+      {openAdd && <AddNew close={handleClose} />}
+      <AddButton onClick={handleOpen}>
+        <BsPlusLg />
+      </AddButton>
+    </>
   );
 };
 const AddButton = styled.div`

@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { RiTodoLine } from "react-icons/ri";
 import Done from "../Layout/DOne";
 import data from "../data/data.json";
 import { AddBtn } from "../Layout/helpers.js";
-import { AddNew } from "../Layout/helpers.js";
-
+import { useFetch } from "../hooks/useFetch";
 const Todo = () => {
   const [newTask, setNewTask] = React.useState(false);
+  const { fetchTodo, myTask } = useFetch();
   const categories = [
     {
       id: 1,
@@ -23,26 +23,29 @@ const Todo = () => {
     },
   ];
 
-  const handleNewTask = (id) => {
-    setNewTask(id, true);
-  };
+  useEffect(() => {
+    fetchTodo();
+  }, []);
+  // const handleNewTask = (id) => {
+  //   setNewTask(id, true);
+  // };
   return (
     <Container>
       <Wrapper>
-        {categories.map((prop) => (
-          <Card>
-            <Category>Personal</Category>
-            {data.map((data) => (
-              <CardContent key={data.id}>
-                <IconHolder>
-                  <RiTodoLine />
-                </IconHolder>
-                <TodoItem>{data.task}</TodoItem>
-                <Done />
-              </CardContent>
-            ))}
-            {newTask && <AddNew handleClose={() => setNewTask(false)} />}
-            <AddBtn newTask={handleNewTask} id={prop.id} />
+        {myTask?.map((prop) => (
+          <Card key={prop.id}>
+            <Category>{prop.category}</Category>
+            {/* {data.map((data) => ( */}
+            <CardContent key={data.id}>
+              <IconHolder>
+                <RiTodoLine />
+              </IconHolder>
+              <TodoItem>{prop?.todo?.task}</TodoItem>
+              <Done done={prop?.todo?.complete} />
+            </CardContent>
+            {/* ))} */}
+            {/* {newTask && <AddNew handleClose={() => setNewTask(false)} />} */}
+            <AddBtn />
           </Card>
         ))}
       </Wrapper>
