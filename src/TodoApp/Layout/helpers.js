@@ -2,12 +2,24 @@ import styled from "styled-components";
 import { FaTimes } from "react-icons/fa";
 import { BsPlusLg } from "react-icons/bs";
 import { useState } from "react";
-export const AddNew = ({ close }) => {
+import { useAdd } from "../hooks/useAdd";
+import { useDispatch } from "react-redux";
+
+export const AddNew = ({ close, id }) => {
+  const { addNewTask } = useAdd();
+  const [task, setTask] = useState("");
+  const dispatch = useDispatch();
+
+  const handleAdd = (payload) => {
+    // console.log("click :", id, task);
+    return payload;
+  };
+
   return (
     <Card>
       <InputHolder>
-        <Input placeholder="Task name" />
-        <Button>Add Task</Button>
+        <Input placeholder="Task name" value={task} onChange={(e) => setTask(e.target.value)} />
+        <Button onClick={() => handleAdd(id(task))}>Add Task</Button>
 
         <CancelBtn onClick={close}>
           <FaTimes />
@@ -17,7 +29,7 @@ export const AddNew = ({ close }) => {
   );
 };
 
-export const AddBtn = ({ newtask }) => {
+export const AddBtn = ({ newtask, id }) => {
   const [openAdd, setOpenAdd] = useState(newtask);
   const handleOpen = () => {
     setOpenAdd(true);
@@ -28,7 +40,7 @@ export const AddBtn = ({ newtask }) => {
   };
   return (
     <>
-      {openAdd && <AddNew close={handleClose} />}
+      {openAdd && <AddNew close={handleClose} id={id} />}
       <AddButton onClick={handleOpen}>
         <BsPlusLg />
       </AddButton>
@@ -60,7 +72,7 @@ const CancelBtn = styled.div`
 `;
 
 const Input = styled.input`
-  width: 250px;
+  width: 200px;
   height: 25px;
   border-radius: 2px;
   border: 1px solid lightgray;
@@ -84,32 +96,14 @@ const InputHolder = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 300px;
-  //   //   max-width: 480px;
-  //   //   margin: 200px auto;
-  //   //   text-align: center;
-  //   //   background-color: indianred;
-  //   //   padding: 30px;
-  //   //   border-radius: 10px;
-  //   //   color: wheat;
-  //   display: flex;
-  //   background: red;
-  //   justify-content: center;
-  //   align-items: center;
-  //   margin: 200px auto;
-  //   width: 300px;
+  height: 200px;
+  padding: 20px;
 `;
 const Card = styled.div`
-  width: 450px;
-  height: 310px;
+  width: 250px;
+  height: 210px;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 100px;
   background: rgb(0, 0, 0, 0.6);
-  //   width: 100%;
-  //   height: 100%;
-  //   position: fixed;
-  //   top: 0;
-  //   left: 0;
-  //   background: rgb(0, 0, 0, 0.6);
 `;

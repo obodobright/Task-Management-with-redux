@@ -2,52 +2,135 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { RiTodoLine } from "react-icons/ri";
 import Done from "../Layout/DOne";
-import data from "../data/data.json";
 import { AddBtn } from "../Layout/helpers.js";
 import { useFetch } from "../hooks/useFetch";
+import { useSelector } from "react-redux";
+import { useAdd } from "../hooks/useAdd";
+import { useDispatch } from "react-redux";
+import {
+  personalAction,
+  careerAction,
+  workAction,
+  shopAction,
+  addCareerTodo,
+  addPersonalTodo,
+  addWorkTodo,
+  addShoppingTodo,
+} from "../Redux/action/Actions";
 const Todo = () => {
-  const [newTask, setNewTask] = React.useState(false);
-  const { fetchTodo, myTask } = useFetch();
-  const categories = [
-    {
-      id: 1,
-      category: "personal",
-    },
-    {
-      id: 2,
-      category: "career",
-    },
-    {
-      id: 3,
-      category: "chores",
-    },
-  ];
+  // useDispatch
+  const dispatch = useDispatch();
+  const { addNewTask } = useAdd();
 
+  // PASSING ADD DATA TO ADDBTN COMPONENT
+  const addPersonal = (task) => {
+    addNewTask("personal", task);
+    dispatch(addPersonalTodo());
+  };
+  const addCareer = (task) => {
+    addNewTask("career", task);
+    dispatch(addCareerTodo());
+  };
+  const addWork = (task) => {
+    addNewTask("work", task);
+    dispatch(addWorkTodo());
+  };
+  const addShopping = (task) => {
+    addNewTask("shopping", task);
+    dispatch(addShoppingTodo());
+  };
+  // STATES FROM REDUX
+  const personal = useSelector((state) => state.allTodos.personal);
+  const career = useSelector((state) => state.allTodos.career);
+  const work = useSelector((state) => state.allTodos.work);
+  const shopping = useSelector((state) => state.allTodos.shopping);
+
+  //  USEFETCH TO FETCH DATA FROM FIREBASE BASE
+  const { fetchTodo } = useFetch();
+  // FUNCTIONS TO CALL DIFFERENT STATES FROM FIREBASE
+  const personalTodo = () => {
+    fetchTodo("personal", personalAction);
+  };
+  const careerTodo = () => {
+    fetchTodo("career", careerAction);
+  };
+  const workTodo = () => {
+    fetchTodo("work", workAction);
+  };
+  const shopTodo = () => {
+    fetchTodo("shopping", shopAction);
+  };
+  // USEEFFECT CALLING DFIREBASE DATA
   useEffect(() => {
-    fetchTodo();
+    personalTodo();
+    careerTodo();
+    workTodo();
+    shopTodo();
   }, []);
-  // const handleNewTask = (id) => {
-  //   setNewTask(id, true);
-  // };
+  // RENDER
   return (
     <Container>
       <Wrapper>
-        {myTask?.map((prop) => (
-          <Card key={prop.id}>
-            <Category>{prop.category}</Category>
-            {/* {data.map((data) => ( */}
-            <CardContent key={data.id}>
+        <Card>
+          <Category>personal</Category>
+          {personal?.map((data) => {
+            return (
+              <CardContent>
+                <IconHolder>
+                  <RiTodoLine />
+                </IconHolder>
+                <TodoItem>{data?.task}</TodoItem>
+                <Done done={data?.done} />
+              </CardContent>
+            );
+          })}
+          {/* {newTask && <AddNew handleClose={() => setNewTask(false)} />} */}
+          <AddBtn id={addPersonal} />
+        </Card>
+        <Card>
+          <Category>career</Category>
+          {career?.map((data) => {
+            return (
+              <CardContent>
+                <IconHolder>
+                  <RiTodoLine />
+                </IconHolder>
+                <TodoItem>{data?.task}</TodoItem>
+                <Done done={data?.done} />
+              </CardContent>
+            );
+          })}
+          {/* {newTask && <AddNew handleClose={() => setNewTask(false)} />} */}
+          <AddBtn id={addCareer} />
+        </Card>
+        <Card>
+          <Category>work</Category>
+          {work?.map((data) => (
+            <CardContent>
               <IconHolder>
                 <RiTodoLine />
               </IconHolder>
-              <TodoItem>{prop?.todo?.task}</TodoItem>
-              <Done done={prop?.todo?.complete} />
+              <TodoItem>{data?.task}</TodoItem>
+              <Done done={data?.done} />
             </CardContent>
-            {/* ))} */}
-            {/* {newTask && <AddNew handleClose={() => setNewTask(false)} />} */}
-            <AddBtn />
-          </Card>
-        ))}
+          ))}
+          {/* {newTask && <AddNew handleClose={() => setNewTask(false)} />} */}
+          <AddBtn id={addWork} />
+        </Card>
+        <Card>
+          <Category>shopping</Category>
+          {shopping?.map((data) => (
+            <CardContent>
+              <IconHolder>
+                <RiTodoLine />
+              </IconHolder>
+              <TodoItem>{data?.task}</TodoItem>
+              <Done done={data?.done} />
+            </CardContent>
+          ))}
+          {/* {newTask && <AddNew handleClose={() => setNewTask(false)} />} */}
+          <AddBtn id={addShopping} />
+        </Card>
       </Wrapper>
     </Container>
   );

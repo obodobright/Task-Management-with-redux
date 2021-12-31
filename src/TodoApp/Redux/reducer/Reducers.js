@@ -27,13 +27,21 @@ export const LoginReducer = (state = initialState, { type, payload }) => {
 export const fetchTodo = (state = allTodos, { type, payload }) => {
     switch (type) {
         case ActionType.IS_FETCHED_PERSONAL:
-            return { personal: payload };
+            return {...state, personal: payload };
         case ActionType.IS_FETCHED_WORK:
-            return { work: payload };
+            return {...state, work: payload };
         case ActionType.IS_FETCHED_SHOPPING:
-            return { shopping: payload };
+            return {...state, shopping: payload };
         case ActionType.IS_FETCHED_CAREER:
-            return { career: payload };
+            return {...state, career: payload };
+        case ActionType.ADD_PERSONAL_TODO:
+            return {...state };
+        case ActionType.ADD_CAREER_TODO:
+            return {...state };
+        case ActionType.ADD_WORK_TODO:
+            return {...state };
+        case ActionType.ADD_SHOPPING_TODO:
+            return {...state };
         default:
             return { state };
     }
