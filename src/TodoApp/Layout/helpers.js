@@ -11,8 +11,7 @@ export const AddNew = ({ close, id }) => {
   const dispatch = useDispatch();
 
   const handleAdd = (payload) => {
-    // console.log("click :", id, task);
-    return payload;
+    return payload, close();
   };
 
   return (

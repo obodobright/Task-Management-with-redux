@@ -46,7 +46,8 @@ const Todo = () => {
   const shopping = useSelector((state) => state.allTodos.shopping);
 
   //  USEFETCH TO FETCH DATA FROM FIREBASE BASE
-  const { fetchTodo } = useFetch();
+  const { fetchTodo, loading, err } = useFetch();
+  console.log(loading);
   // FUNCTIONS TO CALL DIFFERENT STATES FROM FIREBASE
   const personalTodo = () => {
     fetchTodo("personal", personalAction);
@@ -73,18 +74,24 @@ const Todo = () => {
       <Wrapper>
         <Card>
           <Category>personal</Category>
+
           {personal?.map((data) => {
             return (
               <CardContent>
                 <IconHolder>
                   <RiTodoLine />
                 </IconHolder>
-                <TodoItem>{data?.task}</TodoItem>
-                <Done done={data?.done} />
+                <TodoItem>{data?.data?.task}</TodoItem>
+                <Done done={data?.data?.done} id={data?.id} collection="personal" />
               </CardContent>
             );
           })}
-          {/* {newTask && <AddNew handleClose={() => setNewTask(false)} />} */}
+          {loading && <p style={{ color: "white" }}>LOADING ....</p>}
+          {personal?.length === 0 ? (
+            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+              There are no todo
+            </h3>
+          ) : null}
           <AddBtn id={addPersonal} />
         </Card>
         <Card>
@@ -95,12 +102,16 @@ const Todo = () => {
                 <IconHolder>
                   <RiTodoLine />
                 </IconHolder>
-                <TodoItem>{data?.task}</TodoItem>
-                <Done done={data?.done} />
+                <TodoItem>{data?.data?.task}</TodoItem>
+                <Done done={data?.data?.done} id={data?.id} collection="career" />
               </CardContent>
             );
           })}
-          {/* {newTask && <AddNew handleClose={() => setNewTask(false)} />} */}
+          {career?.length === 0 ? (
+            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+              There are no todo
+            </h3>
+          ) : null}
           <AddBtn id={addCareer} />
         </Card>
         <Card>
@@ -110,11 +121,15 @@ const Todo = () => {
               <IconHolder>
                 <RiTodoLine />
               </IconHolder>
-              <TodoItem>{data?.task}</TodoItem>
-              <Done done={data?.done} />
+              <TodoItem>{data?.data?.task}</TodoItem>
+              <Done done={data?.data?.done} id={data?.id} collection="work" />
             </CardContent>
           ))}
-          {/* {newTask && <AddNew handleClose={() => setNewTask(false)} />} */}
+          {work?.length === 0 ? (
+            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+              There are no todo
+            </h3>
+          ) : null}
           <AddBtn id={addWork} />
         </Card>
         <Card>
@@ -124,11 +139,15 @@ const Todo = () => {
               <IconHolder>
                 <RiTodoLine />
               </IconHolder>
-              <TodoItem>{data?.task}</TodoItem>
-              <Done done={data?.done} />
+              <TodoItem>{data?.data?.task}</TodoItem>
+              <Done done={data?.data?.done} id={data?.id} collection="shopping" />
             </CardContent>
           ))}
-          {/* {newTask && <AddNew handleClose={() => setNewTask(false)} />} */}
+          {shopping?.length === 0 ? (
+            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+              There are no todo
+            </h3>
+          ) : null}
           <AddBtn id={addShopping} />
         </Card>
       </Wrapper>

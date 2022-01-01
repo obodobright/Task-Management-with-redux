@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdDownloadDone, MdFreeCancellation } from "react-icons/md";
 import styled from "styled-components";
-
-const Done = ({ done }) => {
+import { firestore } from "../Firebase/firebase";
+import { doc, updateDoc } from "firebase/firestore";
+const Done = ({ done, id, collection }) => {
   const [complete, setComplete] = useState(done);
 
   const handleComplete = () => {
-    setComplete(!complete);
+    setComplete(true);
+    const todoRef = doc(firestore, collection, id);
+    const updateTask = {
+      done: true,
+    };
+    updateDoc(todoRef, updateTask);
   };
+
+  // useEffect(() =>{
+
+  // })
   return (
     <Container>
       {complete ? (

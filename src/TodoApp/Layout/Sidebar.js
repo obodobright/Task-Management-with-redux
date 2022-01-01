@@ -1,16 +1,27 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import "../Layout/Active.css";
-import Todo from "../Components/Todo";
-// import {firestore} from "../Firebase/firebase"
-// import {au} from "firebase/auth"
+import { useState } from "react";
 
 const Sidebar = () => {
+  const [dateTime, setDateTime] = useState(new Date());
+  console.log(dateTime);
   return (
     <Container>
       <Wrapper>
         <User>
-          <p>Good Afternoon User</p>
+          {dateTime.toLocaleTimeString().includes("PM") ? (
+            <P>Good evening, Obodo</P>
+          ) : (
+            <P>Good morning, Obodo</P>
+          )}
+          <TimeContainer>
+            {dateTime.toLocaleDateString("en-NG", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </TimeContainer>
         </User>
         <NavHolder>
           <Nav to="/" activestyle="active">
@@ -25,6 +36,16 @@ const Sidebar = () => {
 
 export default Sidebar;
 
+const P = styled.div`
+  font-size: 25px;
+  font-size: bold;
+`;
+const TimeContainer = styled.div`
+  font-size: 17px;
+  color: white;
+  font-size: bold;
+  // padding: 20px;
+`;
 const Nav = styled(NavLink)`
   font-size: 18px;
   padding: 10px;
@@ -34,8 +55,6 @@ const Nav = styled(NavLink)`
   text-decoration: none;
   color: black;
   background: white;
-  // &.active {
-  // }
 `;
 const NavHolder = styled.div`
   width: 200px;
@@ -44,15 +63,15 @@ const NavHolder = styled.div`
   margin-left: 100px;
 `;
 const User = styled.div`
-  //   padding: 30px;
   height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 300px;
+  flex-direction: column;
 `;
 const Wrapper = styled.div`
-  position: fixed;
+  position: relative;
   width: inherit;
 `;
 const Container = styled.div`
@@ -60,6 +79,9 @@ const Container = styled.div`
   min-width: 300px;
   box-sizing: border-box;
   position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
   min-height: 100vh;
   height: 100%;
   background: blue;
