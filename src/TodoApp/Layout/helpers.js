@@ -49,7 +49,7 @@ export const AddBtn = ({ newtask, id }) => {
 const AddButton = styled.div`
   width: 40px;
   height: 40px;
-  background: blue;
+  background: #122932;
   display: flex;
   align-items: center;
   justify-content: center;

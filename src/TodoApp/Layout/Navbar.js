@@ -1,18 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useLogout } from "../hooks/useLogout";
-// import { Container, Wrapper } from "../Styles/styled";
+import { AuthContext } from "../context/AuthProvider";
+
 const Navbar = () => {
-  const user = useSelector((state) => state.login.user);
-  const { logout } = useLogout();
-
-  const handleLogout = () => {
-    logout();
-  };
-
+  const { user } = useContext(AuthContext);
   console.log(user);
+
   return (
     <Container>
       <Wrapper>
@@ -27,11 +21,7 @@ const Navbar = () => {
             </>
           )}
           <div style={{ flex: "1" }}></div>
-          {user ? (
-            <LinkBtn onClick={handleLogout}>Logout</LinkBtn>
-          ) : (
-            <Links to="login">Login</Links>
-          )}
+          {user ? <LinkBtn>Logout</LinkBtn> : <Links to="login">Login</Links>}
         </LinkHolder>
       </Wrapper>
     </Container>
@@ -49,7 +39,7 @@ const Links = styled(Link)`
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
-  color: inherit;
+  color: white;
 `;
 const LinkHolder = styled.ul`
   margin: 0 20px;
@@ -74,6 +64,6 @@ const Wrapper = styled.div`
 const Container = styled.div`
   width: 100%;
   height: 70px;
-  background: red;
+  background: #122932;
   position: relative;
 `;

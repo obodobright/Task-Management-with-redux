@@ -1,26 +1,34 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { auth } from "../Firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useDispatch } from "react-redux";
-import { LoginAction } from "../Redux/action/Actions";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthProvider";
+import { ActionType } from "../Redux/action-type/actionTypes";
 
 export const useLogin = () => {
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const dispatch = useDispatch();
+    const [err, setErr] = useState(null);
+
+    const navigate = useNavigate();
+
+    const { dispatch } = useContext(AuthContext);
 
     const login = async(email, password) => {
         setLoading(true);
         try {
             const res = await signInWithEmailAndPassword(auth, email, password);
-            dispatch(LoginAction(res.user));
+            dispatch({
+                type: ActionType.IS_LOGGEDIN,
+                payload: res.user,
+            });
+            navigate("/todo");
             console.log(res.user);
             setLoading(false);
-            setError(null);
+            setErr(null);
         } catch (error) {
             setLoading(false);
             console.log(error.message);
         }
     };
-    return { loading, error, login };
+    return { loading, err, login };
 };

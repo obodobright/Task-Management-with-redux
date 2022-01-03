@@ -7,6 +7,7 @@ import { useFetch } from "../hooks/useFetch";
 import { useSelector } from "react-redux";
 import { useAdd } from "../hooks/useAdd";
 import { useDispatch } from "react-redux";
+import { TodoNav } from "../Layout/TodoNavBar";
 import {
   personalAction,
   careerAction,
@@ -70,88 +71,91 @@ const Todo = () => {
   }, []);
   // RENDER
   return (
-    <Container>
-      <Wrapper>
-        <Card>
-          <Category>personal</Category>
-
-          {personal?.map((data) => {
-            return (
-              <CardContent>
+    <>
+      <TodoNav />
+      <Container>
+        <Wrapper>
+          <Card>
+            <Category>personal</Category>
+            {/* {<p>{personal?.length} todos</p>} */}
+            {personal?.map((data) => {
+              return (
+                <CardContent key={data.id}>
+                  <IconHolder>
+                    <RiTodoLine />
+                  </IconHolder>
+                  <TodoItem>{data?.data?.task}</TodoItem>
+                  <Done done={data?.data?.done} id={data?.id} collection="personal" />
+                </CardContent>
+              );
+            })}
+            {loading && <p style={{ color: "white" }}>LOADING ....</p>}
+            {personal?.length === 0 ? (
+              <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                There are no todo
+              </h3>
+            ) : null}
+            <AddBtn id={addPersonal} />
+          </Card>
+          <Card>
+            <Category>career</Category>
+            {career?.map((data) => {
+              return (
+                <CardContent key={data.id}>
+                  <IconHolder>
+                    <RiTodoLine />
+                  </IconHolder>
+                  <TodoItem>{data?.data?.task}</TodoItem>
+                  <Done done={data?.data?.done} id={data?.id} collection="career" />
+                </CardContent>
+              );
+            })}
+            {career?.length === 0 ? (
+              <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                There are no todo
+              </h3>
+            ) : null}
+            <AddBtn id={addCareer} />
+          </Card>
+          <Card>
+            <Category>work</Category>
+            {work?.map((data) => (
+              <CardContent key={data.id}>
                 <IconHolder>
                   <RiTodoLine />
                 </IconHolder>
                 <TodoItem>{data?.data?.task}</TodoItem>
-                <Done done={data?.data?.done} id={data?.id} collection="personal" />
+                <Done done={data?.data?.done} id={data?.id} collection="work" />
               </CardContent>
-            );
-          })}
-          {loading && <p style={{ color: "white" }}>LOADING ....</p>}
-          {personal?.length === 0 ? (
-            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-              There are no todo
-            </h3>
-          ) : null}
-          <AddBtn id={addPersonal} />
-        </Card>
-        <Card>
-          <Category>career</Category>
-          {career?.map((data) => {
-            return (
-              <CardContent>
+            ))}
+            {work?.length === 0 ? (
+              <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                There are no todo
+              </h3>
+            ) : null}
+            <AddBtn id={addWork} />
+          </Card>
+          <Card>
+            <Category>shopping</Category>
+            {shopping?.map((data) => (
+              <CardContent key={data.id}>
                 <IconHolder>
                   <RiTodoLine />
                 </IconHolder>
                 <TodoItem>{data?.data?.task}</TodoItem>
-                <Done done={data?.data?.done} id={data?.id} collection="career" />
+                <Done done={data?.data?.done} id={data?.id} collection="shopping" />
               </CardContent>
-            );
-          })}
-          {career?.length === 0 ? (
-            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-              There are no todo
-            </h3>
-          ) : null}
-          <AddBtn id={addCareer} />
-        </Card>
-        <Card>
-          <Category>work</Category>
-          {work?.map((data) => (
-            <CardContent>
-              <IconHolder>
-                <RiTodoLine />
-              </IconHolder>
-              <TodoItem>{data?.data?.task}</TodoItem>
-              <Done done={data?.data?.done} id={data?.id} collection="work" />
-            </CardContent>
-          ))}
-          {work?.length === 0 ? (
-            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-              There are no todo
-            </h3>
-          ) : null}
-          <AddBtn id={addWork} />
-        </Card>
-        <Card>
-          <Category>shopping</Category>
-          {shopping?.map((data) => (
-            <CardContent>
-              <IconHolder>
-                <RiTodoLine />
-              </IconHolder>
-              <TodoItem>{data?.data?.task}</TodoItem>
-              <Done done={data?.data?.done} id={data?.id} collection="shopping" />
-            </CardContent>
-          ))}
-          {shopping?.length === 0 ? (
-            <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-              There are no todo
-            </h3>
-          ) : null}
-          <AddBtn id={addShopping} />
-        </Card>
-      </Wrapper>
-    </Container>
+            ))}
+            {shopping?.length === 0 ? (
+              <h3 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                There are no todo
+              </h3>
+            ) : null}
+            <AddBtn id={addShopping} />
+          </Card>
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 
@@ -183,13 +187,13 @@ const CardContent = styled.div`
 `;
 const Category = styled.div`
   font-size: 12px;
-  background: red;
+  background: #122932;
   position: absolute;
+  color: white;
   right: 20px;
   top: 10px;
   min-width: 70px;
   height: 15px;
-  background: white;
   border-radius: 3px;
   display: flex;
   justify-content: center;
@@ -200,13 +204,20 @@ const Card = styled.div`
   margin: 20px;
   height: 100%;
   min-height: 200px;
-  background: red;
+  background: ;
+  border: 1px solid lightgray;
   border-radius: 4px;
   position: relative;
   display: flex;
   justify-content: center;
   padding: 20px 10px;
   flex-direction: column;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid #122932;
+    transition: all 350ms;
+  }
 `;
 const Wrapper = styled.div`
   width: 100%;

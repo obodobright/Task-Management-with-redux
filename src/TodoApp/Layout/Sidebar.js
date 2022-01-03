@@ -1,19 +1,31 @@
+import { useContext } from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../Layout/Active.css";
-import { useState } from "react";
+import { useLogout } from "../hooks/useLogout";
+import { AuthContext } from "../context/AuthProvider";
 
 const Sidebar = () => {
-  const [dateTime, setDateTime] = useState(new Date());
+  const { user } = useContext(AuthContext);
+
+  // FOR LOGOUT FUNCTION
+  console.log(user);
+  const { logout } = useLogout();
+  // FUNCTION TO HANDLE LOGOUT
+  const handleLogout = () => {
+    logout();
+  };
+  // DATE AND TIME DISPLAY
+  const dateTime = new Date();
   console.log(dateTime);
   return (
     <Container>
       <Wrapper>
         <User>
           {dateTime.toLocaleTimeString().includes("PM") ? (
-            <P>Good evening, Obodo</P>
+            <P>Good evening, {user?.displayName}</P>
           ) : (
-            <P>Good morning, Obodo</P>
+            <P>Good morning, {user?.displayName}</P>
           )}
           <TimeContainer>
             {dateTime.toLocaleDateString("en-NG", {
@@ -24,11 +36,9 @@ const Sidebar = () => {
           </TimeContainer>
         </User>
         <NavHolder>
-          <Nav to="/" activestyle="active">
-            All Todo
-          </Nav>
-          <Nav to="/">Create</Nav>
+          <Nav to="/todo">All Todo</Nav>
         </NavHolder>
+        <Navs onClick={handleLogout}>Log out</Navs>
       </Wrapper>
     </Container>
   );
@@ -39,6 +49,7 @@ export default Sidebar;
 const P = styled.div`
   font-size: 25px;
   font-size: bold;
+  text-transform: capitalize;
 `;
 const TimeContainer = styled.div`
   font-size: 17px;
@@ -46,15 +57,28 @@ const TimeContainer = styled.div`
   font-size: bold;
   // padding: 20px;
 `;
-const Nav = styled(NavLink)`
+const Nav = styled(Link)`
   font-size: 18px;
   padding: 10px;
-
   margin: 10px 0;
   border-radius: 10px 0;
   text-decoration: none;
   color: black;
   background: white;
+  &.active {
+    color: red;
+  }
+`;
+const Navs = styled.div`
+  flex: 1;
+  height: ;
+  width: 100px;
+  cursor: pointer;
+  margin: 100px auto;
+  border-radius: 3px;
+  background: white;
+  text-align: center;
+  color: #122932;
 `;
 const NavHolder = styled.div`
   width: 200px;
@@ -70,19 +94,34 @@ const User = styled.div`
   width: 300px;
   flex-direction: column;
 `;
-const Wrapper = styled.div`
-  position: relative;
-  width: inherit;
-`;
+const Wrapper = styled.div``;
 const Container = styled.div`
   width: 300px;
   min-width: 300px;
-  box-sizing: border-box;
-  position: relative;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  min-height: 100vh;
-  height: 100%;
-  background: blue;
+  min-height: 100%;
+  // height: 100%;
+  background: #122932;
+  color: white;
+  font-weight: normal;
+  line-height: 2rem;
 `;
+
+// const Container = styled.div`
+//   width: 300px;
+//   min-height: 100vh;
+//   background: #122932;
+//   position: fixed;
+//   color: white;
+//   font-weight: normal;
+//   line-height: 2rem;
+// `;
+
+// display: flex;
+//   flex-direction: row;
+//   flex-wrap: nowrap;
+//   width: 100%;
+//   min-height: 100vh;
+//   background: #ccc;
+//   position: relative;
+//   align-items: stretch;
+//   background: red;

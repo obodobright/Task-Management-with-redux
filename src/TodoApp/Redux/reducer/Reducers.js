@@ -2,6 +2,7 @@ import { ActionType } from "../action-type/actionTypes";
 
 const initialState = {
     user: null,
+    AuthIsReady: false,
 };
 
 const allTodos = {
@@ -11,14 +12,16 @@ const allTodos = {
     shopping: [],
 };
 
-export const LoginReducer = (state = initialState, { type, payload }) => {
-    switch (type) {
+export const LoginReducer = (state = initialState, action) => {
+    switch (action.type) {
         case ActionType.IS_LOGGEDIN:
-            return { user: payload };
+            return {...state, user: action.payload, AuthIsReady: true };
         case ActionType.IS_SIGNED_UP:
-            return { user: payload };
+            return {...state, user: action.payload, AuthIsReady: true };
         case ActionType.IS_LOGGED_OUT:
-            return { user: payload };
+            return {...state, user: action.payload, AuthIsReady: true };
+        case ActionType.ON_AUTH_CHANGED:
+            return {...state, user: action.payload, AuthIsReady: true };
         default:
             return { state };
     }

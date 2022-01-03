@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 const Home = () => {
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <Container>
         <Wrapper>
           <ImageHolder>
@@ -44,7 +44,7 @@ const Button = styled(Link)`
   border-radius: 4px;
   margin: 20px auto;
   cursor: pointer;
-  background: red;
+  background: #122932;
   color: white;
   text-decoration: none;
 `;
@@ -56,7 +56,7 @@ const Content = styled.div`
 const Image = styled.div`
   width: 300px;
   height: 300px;
-  background: red;
+  background: #122932;
   border-radius: 50%;
 `;
 

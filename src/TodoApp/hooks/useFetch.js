@@ -8,7 +8,7 @@ export const useFetch = () => {
     const [loading, setLoading] = useState(false);
     const [err, setErr] = useState(null);
 
-    const fetchTodo = (ref, action) => {
+    const fetchTodo = async(ref, action) => {
         try {
             setLoading(true);
             onSnapshot(collection(firestore, ref), (snapshot) => {

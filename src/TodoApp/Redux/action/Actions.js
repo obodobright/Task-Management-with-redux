@@ -1,5 +1,11 @@
 import { ActionType } from "../action-type/actionTypes";
 
+export const AuthChanged = (user) => {
+    return {
+        type: ActionType.ON_AUTH_CHANGED,
+        payload: user,
+    };
+};
 export const LoginAction = (user) => {
     return {
         type: ActionType.IS_LOGGEDIN,

@@ -11,7 +11,7 @@ export const Form = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // hooks for registration and login
-  const { loading, error, login } = useLogin();
+  const { loading, err, login } = useLogin();
   const { isLoading, isErr, signup } = useSignup();
 
   // functions to handle reg
@@ -36,6 +36,7 @@ export const Form = () => {
       {toggleReg ? (
         <FormHolder>
           <Title>Log in</Title>
+          {err && <ErrMsg>An error occured</ErrMsg>}
           <InputHolder>
             <Label>Email</Label>
             <Input
@@ -66,6 +67,7 @@ export const Form = () => {
       ) : (
         <FormHolder>
           <Title>Sign up</Title>
+          {isErr && <ErrMsg>An error occured</ErrMsg>}
           <InputHolder>
             <Label>Name</Label>
             <Input placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)} />
@@ -102,6 +104,9 @@ export const Form = () => {
   );
 };
 
+const ErrMsg = styled.div`
+  color: red;
+`;
 const P = styled.div`
   margin: 10px 0;
   span {
@@ -135,7 +140,7 @@ const Button = styled.div`
   align-items: center;
   border-radius: 4px;
   margin-top: 10px;
-  background: red;
+  background: #122932;
   color: white;
   cursor: pointer;
 `;
@@ -153,7 +158,7 @@ const Logo = styled.div`
   background: white;
 `;
 const LoginInfo = styled.div`
-  background: red;
+  background: #122932;
   width: 250px;
   height: 100%;
   min-height: 70vh;
@@ -162,19 +167,20 @@ const LoginInfo = styled.div`
   align-items: center;
   flex-direction: column;
   text-align: center;
+
+  p {
+    color: white;
+  }
 `;
 const Card = styled.div`
   width: 800px;
   height: 100%;
   min-height: 70vh;
-  margin-top: 30px;
+  margin-top: 10px;
   border-radius: ;
   display: flex;
   position: relative;
-  left: 150px;
-  top: 70px;
+  left: 270px;
+  top: 50px;
   box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.75);
-  //   justify-content: center;
-  //   position: absolute;
-  //   bottom: 20px;
 `;

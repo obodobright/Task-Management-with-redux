@@ -12,13 +12,13 @@ export const Login = () => {
 };
 
 const Wrapper = styled.div`
-  width: 400px;
-  height: 100%;
-  min-height: 100vh;
-  background: red;
-  position: absolute;
-  top: 0;
-  left: 0;
+  // width: 500px;
+  // height: 100%;
+  // min-height: 100vh;
+  // background: #122932;
+  // position: absolute;
+  // top: 0;
+  // left: 0;
 `;
 
 const Container = styled.div`
