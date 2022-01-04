@@ -10,6 +10,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../Firebase/firebase";
 import { AuthContext } from "../context/AuthProvider";
 import { ActionType } from "../Redux/action-type/actionTypes";
+import { TodoDetails } from "../Components/TodoDetails";
 const Routing = () => {
   const { user, dispatch, authReady } = useContext(AuthContext);
   // const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const Routing = () => {
               <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route path="/todo" exact element={<TodoContainer />} />
+                <Route path="/tododetail/:id" exact element={<TodoDetails />} />
                 <Route path="login" element={<Login />} />
               </Routes>
             </div>
