@@ -14,14 +14,8 @@ const Navbar = () => {
 
         <LinkHolder>
           <Links to="/">Home</Links>
-          {user && (
-            <>
-              <Links to="/">My Todo</Links>
-              <Links to="/">Settings</Links>
-            </>
-          )}
-          <div style={{ flex: "1" }}></div>
-          {user ? <LinkBtn>Logout</LinkBtn> : <Links to="login">Login</Links>}
+          <Links to="login">Login</Links>
+          <Links to="todo">My Todo</Links>
         </LinkHolder>
       </Wrapper>
     </Container>

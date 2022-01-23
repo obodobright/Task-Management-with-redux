@@ -125,6 +125,10 @@ const Input = styled.input`
   border-radius: 4px;
   padding-left: 5px;
   outline: 0;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const Label = styled.div`
   padding: 5px 0;
@@ -133,7 +137,7 @@ const InputHolder = styled.div`
   margin: 7px 0;
 `;
 const Button = styled.div`
-  width: 400px;
+  width: 50%;
   height: 30px;
   display: flex;
   justify-content: center;
@@ -171,16 +175,30 @@ const LoginInfo = styled.div`
   p {
     color: white;
   }
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 const Card = styled.div`
-  width: 800px;
-  height: 100%;
-  min-height: 70vh;
-  margin-top: 10px;
-  border-radius: ;
-  display: flex;
-  position: relative;
-  left: 270px;
-  top: 50px;
-  box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.75);
+  @media (min-width: 768px) {
+    width: 800px;
+    height: 100%;
+    min-height: 70vh;
+    margin-top: 10px;
+    border-radius: ;
+    display: flex;
+    position: relative;
+    left: 270px;
+    top: 50px;
+    box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.75);
+  }
+  @media (max-width: 768px) {
+    width: 350px;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;

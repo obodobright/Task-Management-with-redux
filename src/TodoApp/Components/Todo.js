@@ -18,6 +18,7 @@ import {
   addWorkTodo,
   addShoppingTodo,
 } from "../Redux/action/Actions";
+import Sidebar from "../Layout/Sidebar";
 const Todo = () => {
   // useDispatch
   const dispatch = useDispatch();
@@ -72,7 +73,11 @@ const Todo = () => {
   // RENDER
   return (
     <>
-      <TodoNav />
+      <div style={{ display: "flex" }}>
+        <TodoNav />
+        <Sidebar />
+      </div>
+
       <Container>
         <Wrapper>
           <Card>
