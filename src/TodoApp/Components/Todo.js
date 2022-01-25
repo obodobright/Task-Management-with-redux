@@ -74,7 +74,6 @@ const Todo = () => {
   return (
     <>
       <div style={{ display: "flex" }}>
-        <TodoNav />
         <Sidebar />
       </div>
 

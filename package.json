@@ -1,48 +1,60 @@
 {
-  "name": "my-todo-app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "firebase": "^9.6.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.3.1",
-    "react-loader-spinner": "^4.0.0",
-    "react-redux": "^7.2.6",
-    "react-router-dom": "^6.2.1",
-    "react-scripts": "5.0.0",
-    "redux": "^4.1.2",
-    "styled-components": "^5.3.3",
-    "web-vitals": "^2.1.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "webpack": "^5.67.0"
-  }
+    "name": "my-todo-app",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@babel/core": "^7.16.12",
+        "@babel/plugin-proposal-class-properties": "^7.16.7",
+        "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+        "@babel/preset-env": "^7.16.11",
+        "@babel/preset-react": "^7.16.7",
+        "@testing-library/jest-dom": "^5.16.1",
+        "@testing-library/react": "^12.1.2",
+        "@testing-library/user-event": "^13.5.0",
+        "babel-loader": "^8.2.3",
+        "firebase": "^9.6.1",
+        "html-webpack-plugin": "^5.5.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-icons": "^4.3.1",
+        "react-loader-spinner": "^4.0.0",
+        "react-redux": "^7.2.6",
+        "react-router-dom": "^6.2.1",
+        "react-scripts": "5.0.0",
+        "redux": "^4.1.2",
+        "styled-components": "^5.3.3",
+        "web-vitals": "^2.1.2",
+        "webpack-cli": "^4.9.1",
+        "webpack-dev-server": "^4.7.3"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "dev": "webpack-dev-server --mode development --open --hot",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "css-loader": "^6.5.1",
+        "style-loader": "^3.3.1",
+        "webpack": "^5.67.0"
+    }
 }
